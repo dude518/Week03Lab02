@@ -9,7 +9,7 @@
 <c:import url="/includes/header.html"/>
 <h1>Simple JSP Calculator</h1>
 <div>
-    <form action="index.jsp" method="GET">
+    <form action="calculator" method="POST">
         First: <input type="text" name="first"><br/>
         Second: <input type="text" name="second"><br/>
         <input type="submit" name="operation" value="+"> <input type="submit" name="operation" value="-"> 
@@ -17,5 +17,10 @@
     </form>
 </div>
 <br/>
-<p>RESULT: ${result}</p>
+<c:if test="${finish == true}">
+    <p>RESULT: ${result}</p>
+</c:if>
+<c:if test="${finish == false}">
+    <p> ${message}</p>
+</c:if>
 <c:import url="/includes/footer.html"/>

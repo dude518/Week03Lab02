@@ -30,7 +30,9 @@ public class Calculator extends HttpServlet {
         String first = request.getParameter("first");
         String second = request.getParameter("second");
         String opp = request.getParameter("operation");
+        boolean finish = false;
         int result = 0;
+        String message ="";
         
         if((opp != null && !opp.equals("")) && (first != null && !first.equals("")) && (second != null && !second.equals("")))
         {
@@ -39,10 +41,28 @@ public class Calculator extends HttpServlet {
             char oper = opp.charAt(0);
             switch(oper)
             {
-                
+                case '+':
+                    result = (frstNum + scndNum);
+                    break;
+                case '-':
+                    result = (frstNum - scndNum);
+                    break;
+                case '*':
+                    result = (frstNum * scndNum);
+                    break;
+                case '%':
+                    result = (frstNum % scndNum);
+                    break;
             }
+            finish = true;
         }
-        
-    getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        else
+        {
+            message = "Must enter in all feilds.";
+        }
+        request.setAttribute("message", message);
+        request.setAttribute("finish", finish);
+        request.setAttribute("result", result);
+        getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 }
